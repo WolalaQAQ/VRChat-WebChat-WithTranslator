@@ -1,0 +1,24 @@
+# API 配置
+[api]
+url = ""
+key = ""
+model = "deepseek-v3"
+
+# 提示词配置
+[prompt]
+template = "现在,我需要你将我提供给你的内容翻译成{target_language},请注意,要用日常口语的方式翻译,而不是书面语,并且要尽量保持原文的意思和语气,请不要添加任何额外的内容或解释,直接输出翻译的结果。需要翻译的内容:\n"
+
+# OSC 服务器配置
+[osc]
+ip = "127.0.0.1"
+port = 9000
+
+# Web 服务器配置
+[web]
+ip = "0.0.0.0"
+port = 5000
+
+# 应用程序设置
+[app]
+debug = false
+open_browser = true

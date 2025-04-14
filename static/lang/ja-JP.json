@@ -1,0 +1,25 @@
+{
+    "appTitle": "VRChat WebChat",
+    "inputPlaceholder": "メッセージを入力...",
+    "sendButton": "送信",
+    "translateButton": "翻訳",
+    "combineButton": "結果を組み合わせて送信",
+    "targetLanguageLabel": "対象言語：",
+    "translationPlaceholder": "翻訳結果がここに表示されます...",
+    "charCount": " / 144",
+    "emptyMessage": "翻訳するテキストを入力してください",
+    "emptyTranslation": "原文または翻訳が空であってはなりません",
+    "translating": "翻訳中...",
+    "translationFailed": "翻訳に失敗しました、再試行してください",
+    "languages": {
+        "English": "英語",
+        "Chinese": "中国語",
+        "Japanese": "日本語",
+        "Korean": "韓国語",
+        "French": "フランス語",
+        "German": "ドイツ語",
+        "Spanish": "スペイン語",
+        "Russian": "ロシア語"
+    }
+}
+  

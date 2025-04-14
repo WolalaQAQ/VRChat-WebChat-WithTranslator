@@ -1,0 +1,172 @@
+/* style.css */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+/* 修改聊天容器样式 */
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* 添加相对定位 */
+    overflow: hidden; /* 防止内容溢出 */
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    flex: 0 0 auto;
+}
+
+.language-switcher select {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+}
+
+/* 调整聊天内容区域 */
+.chat-body {
+    padding: 10px;
+    position: absolute; /* 使用绝对定位 */
+    top: 40px; /* 头部高度 */
+    bottom: 180px; /* 底部高度，根据翻译区域调整 */
+    left: 0;
+    right: 0;
+    overflow-y: scroll; /* 改为scroll确保总是显示滚动条 */
+    overflow-x: hidden;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.user-message {
+    text-align: right;
+}
+
+.bot-message {
+    text-align: left;
+}
+
+.message-text {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    word-break: break-all;
+    white-space: normal; 
+    min-height: 28px;
+}
+
+.user-message .message-text {
+    background-color: #c3e6cb;
+}
+
+.bot-message .message-text {
+    background-color: #f8f9fa;
+}
+
+/* 确保底部固定且聊天内容不会被遮挡 */
+.chat-footer {
+    background-color: #f0f0f0;
+    padding: 10px;
+    position: absolute; /* 使用绝对定位 */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: none; /* 移除max-width限制 */
+    width: auto; /* 自动宽度 */
+}
+
+.input-container {
+    display: flex;
+}
+
+.input-container input {
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    border: none;
+}
+
+.input-container button {
+    padding: 5px 10px;
+    border-radius: 0 5px 5px 0;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+#charCount {
+    padding: 5px 5px;
+    border: 2px solid #333333;
+    background-color: #f0f0f0;
+}
+
+/* 翻译功能相关样式 */
+.translation-container {
+    margin-top: 10px;
+}
+
+.translation-container textarea {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    resize: none;
+}
+
+.button-container {
+    display: flex;
+    gap: 5px;
+}
+
+.button-container button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+#translateButton {
+    background-color: #4e7ecc;
+}
+
+#combineButton {
+    background-color: #5cb85c;
+}
+
+.language-selector {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.language-selector label {
+    margin-right: 10px;
+}
+
+.language-selector select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
