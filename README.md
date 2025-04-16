@@ -4,13 +4,7 @@
 
 A tool for more conveniently sending chat messages to VRChat from your browser, with an optional translation feature. **Supports almost any device that can open a browser!**
 
-## Running
-
-### Install Dependencies
-
-```shell
-pip install -r requirements.txt
-```
+## Running the packaged version
 
 ### Configure API (if using translation feature)
 
@@ -24,9 +18,7 @@ key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 ### Start
 
-```shell
-python app.py
-```
+Find the `VRChat_WebChat.exe` file in the `build` directory and double-click to run
 
 You should see the following prompt:
 
@@ -40,15 +32,25 @@ The default browser will automatically open to the `127.0.0.1:5000` page, and yo
 
 You can also access from other devices on the same network using `http://<your_ip>:5000` (such as `http://198.18.0.1:5000` in the example above). Note that if you are using it on a local network, make sure your firewall allows access to port 5000.
 
+## Running the source code
+
+### Install Dependencies
+
+```shell
+pip install -r requirements.txt
+```
+
+### Start
+
+```shell
+python app.py
+```
+
 ## Packaging
 
 ### Dependencies
 
-This project uses `cx_freeze` for packaging. Install it with:
-
-```shell
-pip install cx_Freeze
-```
+This project uses `cx_freeze` for packaging.
 
 ### Create Package
 
@@ -56,9 +58,9 @@ pip install cx_Freeze
 python setup.py build
 ```
 
-## Acknowledgements
+## Acknowledgments
 
-This project is modified from [a2942/VRChat-OSC-WEB-Chat](https://github.com/a2942/VRChat-OSC-WEB-Chat) with added translation functionality. Thanks to the original author for their contribution.
+This project is modified from [a2942/VRChat-OSC-WEB-Chat](https://github.com/a2942/VRChat-OSC-WEB-Chat) with added translation feature. Thanks to the original author for their contribution.
 
 ## License
 

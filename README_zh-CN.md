@@ -4,13 +4,7 @@
 
 用于更方便的在浏览器对VRChat游戏发送聊天内容，并附带翻译功能（可选），**支持几乎任何可以打开浏览器的设备！**
 
-## 运行
-
-### 安装依赖
-
-```shell
-pip install -r requirements.txt
-```
+## 运行已打包版本
 
 ### 配置API(如果使用翻译功能)
 
@@ -24,9 +18,7 @@ key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 ### 启动
 
-```shell
-python app.py
-```
+在`build`目录下找到`VRChat_WebChat.exe`文件,双击运行
 
 此时应该弹出以下提示:
 
@@ -40,15 +32,29 @@ python app.py
 
 你也可以在同一内网的其他设备上使用`http://<your_ip>:5000`访问(如上面示例中的`http://198.18.0.1:5000`),需要注意的是,如果你在局域网中使用,请确保你的防火墙允许访问5000端口
 
+## 运行源代码
+
+### 安装依赖
+
+```shell
+pip install -r requirements.txt
+```
+
+### 配置API(如果使用翻译功能)
+
+配置API同上
+
+### 启动
+
+```shell
+python app.py
+```
+
 ## 打包
 
 ### 依赖
 
-本项目使用`cx_freeze`打包,可以使用以下命令安装:
-
-```shell
-pip install cx_Freeze
-```
+本项目使用`cx_freeze`打包
 
 ### 进行打包
 
