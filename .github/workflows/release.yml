@@ -48,8 +48,6 @@ jobs:
         draft: false
         prerelease: false
         body: |
-          # VRChat WebChat v${{ env.VERSION }}
-          
           Automated build release version ${{ env.VERSION }}
           
           ## Installation
