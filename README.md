@@ -1,18 +1,20 @@
 # VRChat-WebChat-WithTranslator
 
-用于更方便的在浏览器对VRChat游戏发送聊天内容，并附带翻译功能（可选），**支持几乎任何可以打开浏览器的设备！**
+[English](README.md) | [简体中文](README_zh-CN.md)
 
-## 运行
+A tool for more conveniently sending chat messages to VRChat from your browser, with an optional translation feature. **Supports almost any device that can open a browser!**
 
-### 安装依赖
+## Running
+
+### Install Dependencies
 
 ```shell
 pip install -r requirements.txt
 ```
 
-### 配置API(如果使用翻译功能)
+### Configure API (if using translation feature)
 
-修改[config.toml](config.toml)中的`api_url`和`api_key`,API需支持OpenAI格式,示例如下:
+Modify the `api_url` and `api_key` in [config.toml](config.toml). The API needs to support OpenAI format, example:
 
 ```toml
 [api]
@@ -20,13 +22,13 @@ url = "https://api.openai.com"
 key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
-### 启动
+### Start
 
 ```shell
 python app.py
 ```
 
-此时应该弹出以下提示:
+You should see the following prompt:
 
 ```shell
 * Running on all addresses (0.0.0.0)
@@ -34,30 +36,30 @@ python app.py
 * Running on http://198.18.0.1:5000
 ```
 
-并自动使用默认浏览器打开了`127.0.0.1:5000`页面,此时就可以正常使用了
+The default browser will automatically open to the `127.0.0.1:5000` page, and you can now use it normally.
 
-你也可以在同一内网的其他设备上使用`http://<your_ip>:5000`访问(如上面示例中的`http://198.18.0.1:5000`),需要注意的是,如果你在局域网中使用,请确保你的防火墙允许访问5000端口
+You can also access from other devices on the same network using `http://<your_ip>:5000` (such as `http://198.18.0.1:5000` in the example above). Note that if you are using it on a local network, make sure your firewall allows access to port 5000.
 
-## 打包
+## Packaging
 
-### 依赖
+### Dependencies
 
-本项目使用`cx_freeze`打包,可以使用以下命令安装:
+This project uses `cx_freeze` for packaging. Install it with:
 
 ```shell
 pip install cx_Freeze
 ```
 
-### 进行打包
+### Create Package
 
 ```shell
 python setup.py build
 ```
 
-## 鸣谢
+## Acknowledgements
 
-本项目在[a2942/VRChat-OSC-WEB-Chat](https://github.com/a2942/VRChat-OSC-WEB-Chat)的基础上进行了修改,并添加了翻译功能,感谢原作者的贡献
+This project is modified from [a2942/VRChat-OSC-WEB-Chat](https://github.com/a2942/VRChat-OSC-WEB-Chat) with added translation functionality. Thanks to the original author for their contribution.
 
 ## License
 
-本项目使用GPL-3.0许可证,详情请查看[LICENSE](LICENSE)文件
+This project uses the GPL-3.0 license. For details, please check the [LICENSE](LICENSE) file.
