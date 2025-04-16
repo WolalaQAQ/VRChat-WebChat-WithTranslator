@@ -9,7 +9,7 @@ body {
     background-color: #f0f0f0;
 }
 
-/* 修改聊天容器样式 */
+/* Modify chat container style */
 .chat-container {
     max-width: 600px;
     margin: 0 auto;
@@ -18,8 +18,8 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    position: relative; /* 添加相对定位 */
-    overflow: hidden; /* 防止内容溢出 */
+    position: relative; /* Add relative positioning */
+    overflow: hidden; /* Prevent content overflow */
 }
 
 .chat-header {
@@ -42,15 +42,15 @@ body {
     cursor: pointer;
 }
 
-/* 调整聊天内容区域 */
+/* Adjust chat content area */
 .chat-body {
     padding: 10px;
-    position: absolute; /* 使用绝对定位 */
-    top: 40px; /* 头部高度 */
-    bottom: 180px; /* 底部高度，根据翻译区域调整 */
+    position: absolute; /* Use absolute positioning */
+    top: 40px; /* Header height */
+    bottom: 180px; /* Bottom height, adjust according to translation area */
     left: 0;
     right: 0;
-    overflow-y: scroll; /* 改为scroll确保总是显示滚动条 */
+    overflow-y: scroll; /* Change to scroll to always show scrollbar */
     overflow-x: hidden;
 }
 
@@ -83,16 +83,16 @@ body {
     background-color: #f8f9fa;
 }
 
-/* 确保底部固定且聊天内容不会被遮挡 */
+/* Ensure bottom is fixed and chat content is not obscured */
 .chat-footer {
     background-color: #f0f0f0;
     padding: 10px;
-    position: absolute; /* 使用绝对定位 */
+    position: absolute; /* Use absolute positioning */
     bottom: 0;
     left: 0;
     right: 0;
-    max-width: none; /* 移除max-width限制 */
-    width: auto; /* 自动宽度 */
+    max-width: none; /* Remove max-width restriction */
+    width: auto; /* Auto width */
 }
 
 .input-container {
@@ -120,7 +120,7 @@ body {
     background-color: #f0f0f0;
 }
 
-/* 翻译功能相关样式 */
+/* Translation feature related styles */
 .translation-container {
     margin-top: 10px;
 }
