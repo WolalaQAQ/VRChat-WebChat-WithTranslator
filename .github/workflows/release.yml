@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest] # 可以根据需要添加macos-latest和ubuntu-latest
-        python-version: [3.9] # 根据您的项目需要调整Python版本
+        python-version: [3.12] # 根据您的项目需要调整Python版本
 
     steps:
     - uses: actions/checkout@v3
