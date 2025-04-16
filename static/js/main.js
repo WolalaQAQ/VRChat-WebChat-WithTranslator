@@ -1,6 +1,6 @@
-// main.js - 主要JavaScript功能
+// main.js - Main JavaScript functionality
 
-// DOM 元素引用
+// DOM element references
 const chatBody = document.getElementById('chatBody');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
@@ -9,49 +9,49 @@ const translationContainer = document.getElementById('translationContainer');
 const translationResult = document.getElementById('translationResult');
 const combineButton = document.getElementById('combineButton');
 
-// 翻译相关变量和函数
-let translations = {}; // 用于存储加载的翻译
-let currentLanguage = 'zh-CN'; // 默认语言
+// Translation related variables and functions
+let translations = {}; // For storing loaded translations
+let currentLanguage = 'en-US'; // Default language
 
-// 加载特定语言的翻译
+// Load a specific language translation
 async function loadTranslation(lang) {
     try {
         const response = await fetch(`/static/lang/${lang}.json`);
         if (!response.ok) {
-            throw new Error(`无法加载语言 ${lang}: ${response.status}`);
+            throw new Error(`Unable to load language ${lang}: ${response.status}`);
         }
         const data = await response.json();
         translations[lang] = data;
         return data;
     } catch (error) {
-        console.error(`加载语言资源出错 ${lang}:`, error);
+        console.error(`Error loading language resource ${lang}:`, error);
         return null;
     }
 }
 
-// 切换语言函数
+// Language switching function
 async function changeLanguage(lang) {
-    // 检查是否已加载此语言
+    // Check if this language is already loaded
     if (!translations[lang]) {
-        // 尝试加载语言文件
+        // Try to load the language file
         const loaded = await loadTranslation(lang);
         if (!loaded) {
-            alert(`无法加载语言: ${lang}`);
+            alert(`Unable to load language: ${lang}`);
             return;
         }
     }
     
     currentLanguage = lang;
     updateAllTexts();
-    // 记住用户选择的语言
+    // Remember user's language preference
     localStorage.setItem('preferredLanguage', lang);
 }
 
-// 获取翻译文本的辅助函数
+// Helper function to get translated text
 function t(key) {
     if (!translations[currentLanguage]) return key;
     
-    // 处理嵌套对象的情况，如 "languages.English"
+    // Handle nested objects, like "languages.English"
     if (key.includes('.')) {
         const parts = key.split('.');
         let result = translations[currentLanguage];
@@ -67,28 +67,28 @@ function t(key) {
         return result;
     }
     
-    // 普通键的情况
+    // For regular keys
     return translations[currentLanguage][key] || key;
 }
 
-// 更新页面上所有文本
+// Update all text on the page
 function updateAllTexts() {
-    // 更新标题
+    // Update title
     document.getElementById('appTitle').textContent = t('appTitle');
     document.title = t('appTitle');
     
-    // 更新输入框占位符
+    // Update input placeholder
     messageInput.placeholder = t('inputPlaceholder');
     
-    // 更新按钮文本
+    // Update button text
     sendButton.textContent = t('sendButton');
     translateButton.textContent = t('translateButton');
     combineButton.textContent = t('combineButton');
     
-    // 更新标签
+    // Update labels
     document.getElementById('targetLanguageLabel').textContent = t('targetLanguageLabel');
     
-    // 更新目标语言选项
+    // Update target language options
     const targetLanguageSelect = document.getElementById('targetLanguage');
     const options = targetLanguageSelect.querySelectorAll('option');
     
@@ -101,36 +101,36 @@ function updateAllTexts() {
         }
     });
     
-    // 更新翻译结果占位符
+    // Update translation result placeholder
     if (translationResult.value === '') {
         translationResult.placeholder = t('translationPlaceholder');
     }
     
-    // 更新字符计数
+    // Update character count
     updateCharCount();
 }
 
-// 事件监听器
+// Event listeners
 sendButton.addEventListener('click', sendMessage);
 translateButton.addEventListener('click', translateMessage);
 combineButton.addEventListener('click', combineAndSend);
 messageInput.addEventListener('keydown', handleKeyPress);
 
-// 处理回车键按下事件
+// Handle Enter key press event
 function handleKeyPress(event) {
-    if (event.keyCode === 13) { // 检测到回车键按下
-        sendMessage(); // 调用发送消息的逻辑函数
+    if (event.keyCode === 13) { // Enter key detected
+        sendMessage(); // Call the message sending function
     }
 }
 
-// 发送消息函数
+// Send message function
 function sendMessage() {
     const message = messageInput.value;
-    if (!message.trim()) return;  // 不发送空消息
+    if (!message.trim()) return;  // Don't send empty messages
     
     addMessage(message, 'user');
     
-    // 发送消息给后端
+    // Send message to backend
     const params = new URLSearchParams();
     params.append('message', message);
     params.append('typing', "0");
@@ -142,22 +142,22 @@ function sendMessage() {
     var charCountElement = document.getElementById("charCount");
     charCountElement.textContent = "0" + t('charCount');
     
-    // 暂时禁用输入
+    // Temporarily disable input
     setTimeout(function(){
-        sendButton.disabled = true; // 禁用发送按钮
-        messageInput.disabled = true; // 禁用文本框
-    }, 10); //延迟0.1秒
+        sendButton.disabled = true; // Disable send button
+        messageInput.disabled = true; // Disable text box
+    }, 10); // Delay 0.1 seconds
 
-    // 1秒后重新启用输入
+    // Re-enable input after 1 second
     setTimeout(function() {
-        messageInput.value = ""; //清空文本框内容
-        sendButton.disabled = false; // 启用发送按钮
-        messageInput.disabled = false; // 启用文本框
+        messageInput.value = ""; // Clear text box content
+        sendButton.disabled = false; // Enable send button
+        messageInput.disabled = false; // Enable text box
     }, 1000);
 }
 
-// 打字状态变量和函数
-let canSendRequest = true; // 声明一个标志变量，初始状态可以发送请求
+// Typing status variables and functions
+let canSendRequest = true; // Declare a flag variable, initial state is able to send requests
 
 function updateCharCount() {
     var messageInput = document.getElementById("messageInput");           
@@ -166,21 +166,21 @@ function updateCharCount() {
     charCountElement.textContent = messageInput.value.length + t('charCount');
 
     if (canSendRequest) {
-        // 发送请求
+        // Send request
         const params = new URLSearchParams();
         params.append('typing', "1");
         fetch('/', {
             method: 'POST',
             body: params
         });
-        canSendRequest = false; // 设置标志变量为 false，表示正在等待 1 秒的间隔
+        canSendRequest = false; // Set flag variable to false, indicating waiting for 1 second interval
         setTimeout(() => {
-            canSendRequest = true; // 1 秒后将标志变量置为 true，表示可以再次发送请求
-        }, 1000); // 设置延迟为 1 秒（1000 毫秒）
+            canSendRequest = true; // After 1 second, set flag variable to true, indicating can send request again
+        }, 1000); // Set delay to 1 second (1000 milliseconds)
     }
 }
 
-// 翻译消息函数
+// Translate message function
 function translateMessage() {
     const message = messageInput.value.trim();
     if (!message) {
@@ -190,10 +190,10 @@ function translateMessage() {
     
     translationResult.value = t('translating');
     
-    // 获取选择的目标语言
+    // Get selected target language
     const targetLanguage = document.getElementById('targetLanguage').value;
     
-    // 发送翻译请求到后端，包含目标语言
+    // Send translation request to backend, including target language
     const params = new URLSearchParams();
     params.append('translate', message);
     params.append('target_language', targetLanguage);
@@ -208,11 +208,11 @@ function translateMessage() {
     })
     .catch(error => {
         translationResult.value = t('translationFailed');
-        console.error('翻译出错:', error);
+        console.error('Translation error:', error);
     });
 }
 
-// 组合并发送函数
+// Combine and send function
 function combineAndSend() {
     const originalMessage = messageInput.value.trim();
     const translatedMessage = translationResult.value.trim();
@@ -222,26 +222,26 @@ function combineAndSend() {
         return;
     }
     
-    // 组合消息格式为: 原消息（翻译后消息）
+    // Combined message format: original message (translated message)
     const combinedMessage = `${originalMessage} (${translatedMessage})`;
     
-    // 将组合后的消息放入输入框
+    // Put combined message in input box
     messageInput.value = combinedMessage;
     
-    // 发送组合后的消息
+    // Send combined message
     sendMessage();
     
-    // 只清空翻译结果
+    // Only clear translation result
     translationResult.value = '';
 }
 
-// 改进滚动到底部的函数
+// Improved scroll to bottom function
 function scrollToBottom() {
     const chatBody = document.getElementById('chatBody');
     chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-// 在添加消息的函数中使用
+// Use in add message function
 function addMessage(message, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
@@ -252,31 +252,79 @@ function addMessage(message, sender) {
     messageDiv.appendChild(messageText);
     chatBody.appendChild(messageDiv);
     
-    // 确保滚动到底部
-    setTimeout(scrollToBottom, 50); // 短暂延迟确保DOM更新
+    // Ensure scrolling to bottom
+    setTimeout(scrollToBottom, 50); // Brief delay to ensure DOM update
 }
 
-// 页面初始化时加载语言
+// Get the user's system language
+function getUserSystemLanguage() {
+    const browserLang = navigator.language || navigator.userLanguage;
+    console.log('Detected browser language:', browserLang);
+    return browserLang;
+}
+
+// Language code mapping for primary language codes
+const languageCodeMapping = {
+    'ja': 'ja-JP',
+    'zh': 'zh-CN',
+    'en': 'en-US'
+};
+
+// Load language on page initialization
 async function initializeLanguage() {
-    // 尝试从localStorage加载保存的语言偏好
-    const savedLanguage = localStorage.getItem('preferredLanguage') || 'zh-CN';
+    // First try to load saved language preference from localStorage
+    let preferredLanguage = localStorage.getItem('preferredLanguage');
     
-    // 先加载默认语言
-    await loadTranslation(savedLanguage);
-    
-    // 设置当前语言
-    currentLanguage = savedLanguage;
-    if (document.getElementById('interfaceLanguage')) {
-        document.getElementById('interfaceLanguage').value = savedLanguage;
+    // If no saved preference, use system language
+    if (!preferredLanguage) {
+        const systemLanguage = getUserSystemLanguage();
+        
+        // Check if we have a translation for this language
+        try {
+            const response = await fetch(`/static/lang/${systemLanguage}.json`);
+            if (response.ok) {
+                preferredLanguage = systemLanguage;
+                console.log(`Using system language: ${systemLanguage}`);
+            } else {
+                // If exact match fails, try the primary language code (e.g., 'en' from 'en-US')
+                const primaryLang = systemLanguage.split('-')[0];
+                
+                // Check if we have a mapping for this primary language
+                const mappedLang = languageCodeMapping[primaryLang] || primaryLang;
+                console.log(`Mapping primary language: ${primaryLang} to ${mappedLang}`);
+                
+                const mappedResponse = await fetch(`/static/lang/${mappedLang}.json`);
+                
+                if (mappedResponse.ok) {
+                    preferredLanguage = mappedLang;
+                    console.log(`Using mapped language: ${mappedLang}`);
+                } else {
+                    preferredLanguage = 'zh-CN'; // Default fallback
+                    console.log(`No translation available for ${systemLanguage}, using default: zh-CN`);
+                }
+            }
+        } catch (error) {
+            console.error('Error detecting language:', error);
+            preferredLanguage = 'zh-CN'; // Default fallback
+        }
     }
     
-    // 应用当前语言
+    // Load the selected language
+    await loadTranslation(preferredLanguage);
+    
+    // Set current language
+    currentLanguage = preferredLanguage;
+    if (document.getElementById('interfaceLanguage')) {
+        document.getElementById('interfaceLanguage').value = preferredLanguage;
+    }
+    
+    // Apply current language
     updateAllTexts();
 }
 
-// DOM加载完成后初始化应用
+// Initialize app after DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM元素可能还未加载，在DOMContentLoaded事件中重新获取引用
+    // DOM elements may not be loaded yet, get references again in DOMContentLoaded event
     const elementsToLoad = [
         'chatBody', 'messageInput', 'sendButton', 'translateButton',
         'translationContainer', 'translationResult', 'combineButton'
@@ -291,37 +339,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // 初始化语言
+    // Initialize language
     initializeLanguage();
 });
 
-// 添加窗口大小变化监听，确保滚动条正确显示
+// Add window resize listener to ensure scrollbar displays correctly
 window.addEventListener('resize', function() {
     scrollToBottom();
 });
 
-// 添加到main.js中
+// Add to main.js
 function adjustChatBodyHeight() {
     const chatBody = document.getElementById('chatBody');
     const chatHeader = document.querySelector('.chat-header');
     const chatFooter = document.querySelector('.chat-footer');
     
-    // 计算聊天区域应该的高度
+    // Calculate chat area's height
     const headerHeight = chatHeader.offsetHeight;
     const footerHeight = chatFooter.offsetHeight;
     const windowHeight = window.innerHeight;
     
-    // 设置聊天区域高度
+    // Set chat area height
     chatBody.style.top = headerHeight + 'px';
     chatBody.style.bottom = footerHeight + 'px';
     
-    // 确保滚动到底部
+    // Ensure scroll to bottom
     scrollToBottom();
 }
 
-// 在页面加载和窗口大小变化时调整高度
+// Adjust height on page load and window resize
 document.addEventListener('DOMContentLoaded', adjustChatBodyHeight);
 window.addEventListener('resize', adjustChatBodyHeight);
 
-// 每当翻译区域显示/隐藏时也调整高度
-// 可以添加这个逻辑到相关函数中
+// Also adjust height whenever translation area is shown/hidden
+// This logic can be added to relevant functions
