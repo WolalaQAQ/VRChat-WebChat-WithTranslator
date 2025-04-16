@@ -18,7 +18,7 @@ build_exe_options = {
     ],
     "include_msvcr": True,
     "optimize": 2,
-    "build_exe": f"build/VRChat_WebChat_{app_major_version}-{app_minor_version}"  # 自定义输出目录
+    "build_exe": f"build/VRChat_WebChat"  # 自定义输出目录
 }
 
 setup(

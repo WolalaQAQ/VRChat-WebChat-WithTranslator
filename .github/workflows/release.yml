@@ -1,34 +1,35 @@
-name: Build and Release
+name: Build and Release VRChat WebChat
 
 on:
   push:
     tags:
-      - 'v*' # 匹配所有以v开头的标签，例如v1.0.0
+      - 'v*' # Matches all tags starting with v, e.g., v1.0, v1.1, etc.
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest] # 可以根据需要添加macos-latest和ubuntu-latest
-        python-version: [3.12] # 根据您的项目需要调整Python版本
-
+    runs-on: windows-latest  # Your app appears to be designed for Windows
+    
     steps:
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0 # 获取所有历史记录和标签
+        fetch-depth: 0 # Fetch all history and tags
         
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.12'  # Choose appropriate Python version
         
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install cx_Freeze
-        # 安装您项目的依赖
         pip install -r requirements.txt
+        
+    - name: Extract version from tag
+      id: get_version
+      run: |
+        # Extract version number from tag (v1.0 -> 1.0)
+        $VERSION = "${{ github.ref_name }}".Substring(1)
+        echo "VERSION=$VERSION" | Out-File -FilePath $env:GITHUB_ENV -Append
         
     - name: Build with cx_Freeze
       run: |
@@ -36,22 +37,23 @@ jobs:
         
     - name: Zip build artifacts
       run: |
-        # 根据操作系统选择打包命令
-        if [ "${{ matrix.os }}" == "windows-latest" ]; then
-          cd build
-          powershell Compress-Archive -Path "exe.*" -DestinationPath "../${{ github.ref_name }}-${{ matrix.os }}.zip"
-        else
-          cd build
-          zip -r "../${{ github.ref_name }}-${{ matrix.os }}.zip" "exe.*"
-        fi
-      shell: bash
-        
+        $BUILD_DIR = "build/VRChat_WebChat"  # Use the build directory defined in your setup.py
+        Compress-Archive -Path $BUILD_DIR/* -DestinationPath "VRChat_WebChat_${{ env.VERSION }}.zip"
+      
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        files: |
-          ${{ github.ref_name }}-${{ matrix.os }}.zip
+        files: VRChat_WebChat_${{ env.VERSION }}.zip
+        name: VRChat WebChat ${{ env.VERSION }}
         draft: false
         prerelease: false
+        body: |
+          # VRChat WebChat v${{ env.VERSION }}
+          
+          Automated build release version ${{ env.VERSION }}
+          
+          ## Installation
+          1. Download and extract the zip file
+          2. Run VRChat_WebChat.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
