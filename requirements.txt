@@ -2,3 +2,4 @@ flask
 python-osc
 toml
 requests
+cx_freeze
