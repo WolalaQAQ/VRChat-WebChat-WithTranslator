@@ -53,6 +53,18 @@ body {
     overflow-y: scroll; /* Change to scroll to always show scrollbar */
     overflow-x: hidden;
 }
+/* 添加消息时间样式 */
+.message-container {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+}
+.message-time {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+    text-align: right;
+}
 
 .message {
     margin-bottom: 10px;
@@ -66,6 +78,15 @@ body {
     text-align: left;
 }
 
+.user-message .message-time {
+    text-align: right;
+}
+
+.bot-message .message-time {
+    text-align: left;
+}
+
+/* 调整原有消息样式以适应新的结构 */
 .message-text {
     display: inline-block;
     padding: 5px 10px;
