@@ -246,10 +246,31 @@ function addMessage(message, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
     messageDiv.classList.add(sender + '-message');
+    
+    // 创建消息文本元素
     const messageText = document.createElement('span');
     messageText.classList.add('message-text');
     messageText.innerHTML = message;
-    messageDiv.appendChild(messageText);
+    
+    // 创建时间元素
+    const messageTime = document.createElement('span');
+    messageTime.classList.add('message-time');
+    
+    // 获取当前时间并格式化，精确到秒
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    messageTime.textContent = `${hours}:${minutes}:${seconds}`;
+    
+    // 创建包装消息和时间的容器
+    const messageContainer = document.createElement('div');
+    messageContainer.classList.add('message-container');
+    
+    messageContainer.appendChild(messageText);
+    messageContainer.appendChild(messageTime);
+    
+    messageDiv.appendChild(messageContainer);
     chatBody.appendChild(messageDiv);
     
     // Ensure scrolling to bottom
