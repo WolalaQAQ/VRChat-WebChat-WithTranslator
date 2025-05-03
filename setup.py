@@ -7,7 +7,7 @@ packages_to_exclude = ['tkinter', 'test', 'distutils', 'pydoc_data', 'lib2to3']
 
 app_major_version = 1
 app_minor_version = 0
-app_patch_version = 5
+app_patch_version = 6
 
 build_exe_options = {
     "packages": ["flask", "pythonosc", "requests", "json", "logging", "webbrowser", "toml"],
