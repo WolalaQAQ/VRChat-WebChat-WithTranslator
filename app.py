@@ -45,6 +45,7 @@ def translate_text(text, config, target_language):
     
     # Use target_language from frontend
     prompt = prompt.replace("{target_language}", target_language)
+    prompt = prompt.replace("{text}", text)
     
     headers = {
         "Authorization": 'Bearer ' + api_key,
@@ -53,7 +54,7 @@ def translate_text(text, config, target_language):
     params = {
         "messages": [{
             "role": 'user',
-            "content": f"{prompt}\n{text}"
+            "content": f"{prompt}"
         }],
         "model": config["api"]["model"],
     }
